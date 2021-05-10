@@ -14,10 +14,17 @@
     height: 5vh;
     border-radius: 3em;
   }
-  
-  #recipe-bar {
-    height: 15vh;
+
+  #buttons{
+    display:flex;
+    justify-content: space-between;
     background: skyblue;
+    padding:0 1em 1em 1em;
+  }
+
+  #recipe-bar {
+    background: skyblue;
+    height: 15vh;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -39,10 +46,6 @@
     padding-left: 1em;
   }
 
-  #recipe-bar button{
-    float:right;
-  }
-  
   #recipe-summary-container {
     height: 75vh;
     text-align: center;
