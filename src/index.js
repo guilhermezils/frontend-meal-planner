@@ -1,8 +1,8 @@
 const recipesUrl = "http://localhost:3000/recipes"
 const pageSize = 5;
-let currentPage = 1;
+let pageOffset = 0;
 
-fetch(`${recipesUrl}/?_page=${currentPage}&_limit=${pageSize}`) 
+fetch(`${recipesUrl}/limit=${pageSize}/offset=${pageOffset}`) 
 .then(res=>res.json())
 .then(displayRecipes)
 
