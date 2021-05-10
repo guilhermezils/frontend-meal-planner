@@ -29,8 +29,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 2em;
-    border: 1px solid blue;
+    /* border-radius: 5em;
+    border: 1px solid blue; */
+  }
+
+  #recipe-bar span img{
+    max-width: 75%;
+    max-height: 75%;
+    padding-left: 1em;
+  }
+
+  #recipe-bar button{
+    float:right;
   }
   
   #recipe-summary-container {
