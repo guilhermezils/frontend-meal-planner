@@ -59,26 +59,39 @@ function toggleWeeklyMealsView(event)
     //grab meals from database
     fetch(mealsUrl)
     .then(res=>res.json())
-    .then(addMealsToTable);
+    .then(displayPlannedMeals);
 }
 
-function addMealsToTable(meals)
+function displayPlannedMeals(meals)
 {
     // meals.sort
     mealCards.innerHTML = '';
-    meals.forEach(meal => addMeal(meal));
+    meals.forEach(meal => displayMeal(meal));
 }
 
-function addMeal(meal)
+function displayMeal(meal)
 {
+    let recipeName = '';    
     const mealPlanCard = document.createElement('span');
-    mealPlanCard.innerHTML = `
-        <strong>${meal.date}</strong>
-        <p>${meal.typeOfMeal}</p>
-        <p>${meal.recipe_id}</p>
-    `
+    fetch(`${recipesUrl}/${meal.recipe_id}`)
+    .then(res=>res.json())
+    .then(recipe => {
+        recipeName = recipe.name;
+        mealPlanCard.innerHTML = `
+            <strong>${meal.date}</strong>
+            <p>${recipeName}</p>
+            <p>${meal.typeOfMeal}</p>
+            <button>Edit Meal </button>`
+        // addEditFunctionalityToButton();
+    });
+
     mealPlanCard.classList.add('meal-card')
     mealCards.appendChild(mealPlanCard);
+}
+
+function editMeal(event)
+{  
+    console.log(event);
 }
 
 
