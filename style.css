@@ -87,13 +87,21 @@ body {
 
   #meal-plan{
     height: 15%;
-    width: auto;
-    background: lemonchiffon;
+    /* width: 75%; */
+    background: lemonchiffon; 
   }
 
   .flex {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    align-items: flex-start;
+    align-items: center;
+  }
+
+  #meal-cards{
+    justify-content: space-around;
+  }
+
+  .meal-card{
+    padding: 1em;
   }

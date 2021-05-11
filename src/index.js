@@ -48,6 +48,7 @@ const weeklyMealsButton = document.getElementById('weekly-meals-btn')
 weeklyMealsButton.addEventListener('click', toggleWeeklyMealsView);
 
 const mealPlanDiv = document.getElementById('meal-plan');
+const mealCards = document.getElementById('meal-cards');
 
 function toggleWeeklyMealsView(event)
 {
@@ -64,8 +65,7 @@ function toggleWeeklyMealsView(event)
 function addMealsToTable(meals)
 {
     // meals.sort
-    mealPlanDiv.innerHTML = '';
-    mealPlanDiv.innerHTML = `<h4>Weekly Meals</h4>`;
+    mealCards.innerHTML = '';
     meals.forEach(meal => addMeal(meal));
 }
 
@@ -73,11 +73,12 @@ function addMeal(meal)
 {
     const mealPlanCard = document.createElement('span');
     mealPlanCard.innerHTML = `
-        <h4>${meal.date}</h4>
+        <strong>${meal.date}</strong>
         <p>${meal.typeOfMeal}</p>
         <p>${meal.recipe_id}</p>
     `
-    mealPlanDiv.appendChild(mealPlanCard);
+    mealPlanCard.classList.add('meal-card')
+    mealCards.appendChild(mealPlanCard);
 }
 
 
