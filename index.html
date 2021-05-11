@@ -33,13 +33,26 @@
         </div>
       </div>
       
-      <div id='meal-plan' class = 'margin flex' style = 'display:none'>
-        <strong>Weekly Meals</strong>
-        <div id = 'meal-cards' class = 'margin flex'></div>
-        <!--<form id = 'new-meal'>
-          <>
-          <button> Edit Meals </button>
-          </form> -->
+      <div id = 'weekly-meal-planner' style = 'display:none'>
+        <div id='meal-plan' class = 'margin flex' >
+          <strong>Weekly Meals</strong>
+          <div id = 'meal-cards' class = 'margin flex'></div>
+        </div>
+        <hr>
+        <form id = 'edit-meal'>
+          <label> Recipe Name </label>  
+          <input type='text' name='name' placeholder = 'Recipe Name'>
+          <label> Day of Meal</label>
+          <input type='text' name='date' placeholder = 'Monday'>
+          <label> Meal Type </label>
+          <select id='meal-type' name='type-of-meal'>
+            <option value="breakfast">Breakfast</option>
+            <option value="lunch">Lunch</option>
+            <option value="dinner">Dinner</option>
+            <option value="snack">Snack</option>
+            </select> 
+          <input type='submit'> </input>
+        </form>
       </div>
     
 </body>

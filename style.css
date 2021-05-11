@@ -85,6 +85,15 @@ body {
     max-height: 25vw;
   }
 
+  #weekly-meal-planner {
+    display:block;
+  }
+
+  #weekly-meal-planner form{
+    padding-left: 1em;
+    align-self: center;
+  }
+
   #meal-plan{
     height: 15%;
     /* width: 75%; */

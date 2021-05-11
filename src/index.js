@@ -61,6 +61,7 @@ function updatePage(value)
 const weeklyMealsButton = document.getElementById('weekly-meals-btn')
 weeklyMealsButton.addEventListener('click', toggleWeeklyMealsView);
 
+const weeklyMealPlanner = document.getElementById('weekly-meal-planner');
 const mealPlanDiv = document.getElementById('meal-plan');
 const mealCards = document.getElementById('meal-cards');
 
@@ -69,7 +70,8 @@ function toggleWeeklyMealsView(event)
     //change text on button
     weeklyMealsButton.innerHTML = weeklyMealsButton.innerHTML == 'Hide Weekly Meals' ? 'Weekly Meals' : 'Hide Weekly Meals';
     //get div
-    mealPlanDiv.style.display = mealPlanDiv.style.display == 'flex' ? 'none' : 'flex';
+    weeklyMealPlanner.style.display = weeklyMealPlanner.style.display == 'block' ? 'none' : 'block';
+
     //grab meals from database
     fetch(mealsUrl)
     .then(res=>res.json())
@@ -97,16 +99,32 @@ function displayMeal(meal)
             <p>${meal.typeOfMeal}</p>
             <button>Edit Meal </button>
         `
-        console.log(mealPlanCard);
+        mealPlanCard.querySelector('button').addEventListener('click', () => editMeal(meal, recipeName))
     });
 
     mealPlanCard.classList.add('meal-card')
     mealCards.appendChild(mealPlanCard);
 }
 
-function editMeal(event)
+function editMeal(meal, recipeName)
 {  
-    console.log(event);
+    console.log(meal);
+    console.log(recipeName);
+    //get form
+    const editMealsForm = document.getElementById('edit-meal');
+    editMealsForm.name.value = recipeName;
+    editMealsForm.date.value = meal.date;
+
+    editMealsForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        // event.target
+        console.log(event.target);
+    });
 }
+
+// function updateMeal(meal)
+// {
+//     console.log(meal.id);
+// }
 
 
