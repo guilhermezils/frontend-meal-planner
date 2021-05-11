@@ -5,7 +5,6 @@ let pageOffset = 0;
 const recipeBar = document.getElementById('recipe-bar');
 const recipeCard = document.getElementById('recipe-summary-container')//Guilherme
 
-
 getRecipes();
 
 function getRecipes()//Alexandra 
@@ -33,18 +32,8 @@ function displayRecipe(recipe)//Alexandra
     recipeBar.append(recipeDiv);
 }
 
-
-
-
-
 //Render Details - display 
-
 const recipeBox = document.createElement('recipe-div')
-
-
-
-
-
 
 //fetch that one recipe
 function fetchOneRecipe(recipe) {
@@ -53,18 +42,6 @@ function fetchOneRecipe(recipe) {
         .then(response => response.json())
         .then(data)
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 //get button element to add page updates to 
 document.getElementById('next-page').addEventListener('click', () => updatePage(5))
@@ -118,8 +95,9 @@ function displayMeal(meal)
             <strong>${meal.date}</strong>
             <p>${recipeName}</p>
             <p>${meal.typeOfMeal}</p>
-            <button>Edit Meal </button>`
-        // addEditFunctionalityToButton();
+            <button>Edit Meal </button>
+        `
+        console.log(mealPlanCard);
     });
 
     mealPlanCard.classList.add('meal-card')
