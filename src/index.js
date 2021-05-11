@@ -54,8 +54,7 @@ function toggleWeeklyMealsView(event)
     //change text on button
     weeklyMealsButton.innerHTML = weeklyMealsButton.innerHTML == 'Hide Weekly Meals' ? 'Weekly Meals' : 'Hide Weekly Meals';
     //get div
-    mealPlanDiv.style = mealPlanDiv.style == 'display:show' ? 'display:none' : 'display:show';
-    console.log(mealPlanDiv.style);
+    mealPlanDiv.style.display = mealPlanDiv.style.display == 'flex' ? 'none' : 'flex';
     //grab meals from database
     fetch(mealsUrl)
     .then(res=>res.json())
