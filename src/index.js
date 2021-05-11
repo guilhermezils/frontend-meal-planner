@@ -41,3 +41,4 @@ function updatePage(value)
     }
     getRecipes();
 }
+

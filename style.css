@@ -1,10 +1,32 @@
 
+body {
+  font-family: Roboto,Arial,Helvetica,sans-serif;
+}
+
+#header {
+  background: dimgray;
+  height: 4em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+}
+
+#header h1 {
+  padding-left: .25em;
+  font-size: 45px;
+  line-height: 1.29;
+}
+
+#nav-buttons {
+  padding-right: .25em;
+}
+
 #filter-div {
     display: flex;
     justify-content: center;
     align-items: center;
     background: skyblue;
-  
   }
   
   #vegan-filter {
