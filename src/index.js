@@ -2,6 +2,10 @@ const recipesUrl = "http://localhost:3000/recipes";
 const mealsUrl = "http://localhost:3000/meals";
 const pageSize = 5;
 let pageOffset = 0;
+const headers = {
+    'Content-Type': 'application/json',
+    Accept: 'application/json' 
+}
 const recipeBar = document.getElementById('recipe-bar');
 const recipeCard = document.getElementById('recipe-summary-container')//Guilherme
 
@@ -73,6 +77,11 @@ function toggleWeeklyMealsView(event)
     weeklyMealPlanner.style.display = weeklyMealPlanner.style.display == 'block' ? 'none' : 'block';
 
     //grab meals from database
+    getMeals();
+}
+
+function getMeals()
+{
     fetch(mealsUrl)
     .then(res=>res.json())
     .then(displayPlannedMeals);
@@ -108,8 +117,6 @@ function displayMeal(meal)
 
 function editMeal(meal, recipeName)
 {  
-    console.log(meal);
-    console.log(recipeName);
     //get form
     const editMealsForm = document.getElementById('edit-meal');
     editMealsForm.name.value = recipeName;
@@ -117,14 +124,21 @@ function editMeal(meal, recipeName)
 
     editMealsForm.addEventListener('submit', (event) => {
         event.preventDefault();
-        // event.target
-        console.log(event.target);
+        // const name = event.target.name.value;
+        const date = event.target.date.value;
+        const typeOfMeal = event.target['type-of-meal'].value;
+
+        const updatedMeal = {
+            date,
+            typeOfMeal
+        }
+        const mealUrl = `${mealsUrl}/${meal.id}`;
+        fetch(mealUrl, {
+            method: 'PATCH',
+            headers,
+            body: JSON.stringify(updatedMeal)
+        })
+        .then(res => res.json())
+        .then(console.log)
     });
 }
-
-// function updateMeal(meal)
-// {
-//     console.log(meal.id);
-// }
-
-
