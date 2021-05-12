@@ -83,7 +83,7 @@ function toggleWeeklyMealsView(event)
 function getMeals()
 {
     fetch(mealsUrl)
-    .then(res=>res.json())
+    .then(res => res.json())
     .then(displayPlannedMeals);
 }
 
@@ -139,6 +139,15 @@ function editMeal(meal, recipeName)
             body: JSON.stringify(updatedMeal)
         })
         .then(res => res.json())
-        .then(console.log)
+        .then((meal) => {
+            console.log(meal);
+            // meals = [meal]
+            getMeals();
+        })
     });
 }
+
+
+//make a fetch request to recipe ingredients
+//using the recipe id
+//get request to recipeingredients#index
