@@ -77,14 +77,47 @@ function toggleWeeklyMealsView(event)
     weeklyMealPlanner.style.display = weeklyMealPlanner.style.display == 'block' ? 'none' : 'block';
 
     //grab meals from database
-    getMeals();
+    getMeals(displayPlannedMeals);
+}
+//add event listener to grocery button
+document.getElementById('grocery-list-btn').addEventListener('click', (event) => {
+    toggleGroceryListView(event);
+    //send fetch to get all meals from table
+    getMeals(getListOfIngredients);
+});
+
+const groceryListDiv = document.getElementById('grocery-list');
+
+function toggleGroceryListView(event)
+{    //change text on button
+    event.target.innerHTML = event.target.innerHTML == 'Hide Grocery List' ? 'Grocery List' : 'Hide Grocery List';
+    //get div
+    groceryListDiv.style.display = groceryListDiv.style.display == 'block' ? 'none' : 'block';
 }
 
-function getMeals()
+function getListOfIngredients(meals)
+{
+    groceryListDiv.innerHTML = '';
+    const groceryList = document.createElement('ul');
+    groceryList.innerHTML = '<h4><i>Grocery List</i></h4>';
+    //get ingredients for all those meals
+    meals.forEach(meal => {
+        const recipeId = meal.recipe_id;
+        console.log(recipeId);
+        const groceryItem = document.createElement('li');
+        groceryItem.innerHTML = `${recipeId}`;
+        groceryList.appendChild(groceryItem);
+    })
+    groceryListDiv.appendChild(groceryList);
+    //list out each ingredient for those meals
+    // console.log(meals);
+}
+
+function getMeals(functionToCall)
 {
     fetch(mealsUrl)
     .then(res => res.json())
-    .then(displayPlannedMeals);
+    .then(functionToCall);
 }
 
 function displayPlannedMeals(meals)
@@ -125,7 +158,7 @@ function deleteMeal(meal)
         method: 'DELETE',
         headers
     })
-    .then(getMeals);
+    .then(() => getMeals(displayPlannedMeals));
 }
 
 const editMealsForm = document.getElementById('edit-meal');
@@ -158,12 +191,7 @@ editMealsForm.addEventListener('submit', (event) => {
     .then(res => res.json())
     .then((meal) => {
         console.log(meal);
-        getMeals();
+        getMeals(displayPlannedMeals);
     })
 });
 
-
-
-//make a fetch request to recipe ingredients
-//using the recipe id
-//get request to recipeingredients#index
