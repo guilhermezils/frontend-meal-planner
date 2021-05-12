@@ -115,37 +115,40 @@ function displayMeal(meal)
     mealCards.appendChild(mealPlanCard);
 }
 
+const editMealsForm = document.getElementById('edit-meal');
+
 function editMeal(meal, recipeName)
 {  
-    //get form
-    const editMealsForm = document.getElementById('edit-meal');
+    //fill in form with meal data
     editMealsForm.name.value = recipeName;
     editMealsForm.date.value = meal.date;
-
-    editMealsForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-        // const name = event.target.name.value;
-        const date = event.target.date.value;
-        const typeOfMeal = event.target['type-of-meal'].value;
-
-        const updatedMeal = {
-            date,
-            typeOfMeal
-        }
-        const mealUrl = `${mealsUrl}/${meal.id}`;
-        fetch(mealUrl, {
-            method: 'PATCH',
-            headers,
-            body: JSON.stringify(updatedMeal)
-        })
-        .then(res => res.json())
-        .then((meal) => {
-            console.log(meal);
-            // meals = [meal]
-            getMeals();
-        })
-    });
+    editMealsForm['meal-id'].value = meal.id;
 }
+
+editMealsForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    // console.log(event.target);
+    const date = event.target.date.value;
+    const typeOfMeal = event.target['type-of-meal'].value;
+    const mealId = event.target['meal-id'].value;
+
+    const updatedMeal = {
+        date,
+        typeOfMeal
+    }
+    const mealUrl = `${mealsUrl}/${mealId}`;
+    fetch(mealUrl, {
+        method: 'PATCH',
+        headers,
+        body: JSON.stringify(updatedMeal)
+    })
+    .then(res => res.json())
+    .then((meal) => {
+        console.log(meal);
+        getMeals();
+    })
+});
+
 
 
 //make a fetch request to recipe ingredients
