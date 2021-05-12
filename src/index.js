@@ -106,13 +106,26 @@ function displayMeal(meal)
             <strong>${meal.date}</strong>
             <p>${recipeName}</p>
             <p>${meal.typeOfMeal}</p>
-            <button>Edit Meal </button>
+            <button id = 'edit'>Edit Meal </button>
+            <button id = 'delete'>Remove</button>
         `
-        mealPlanCard.querySelector('button').addEventListener('click', () => editMeal(meal, recipeName))
+        mealPlanCard.querySelector('#edit').addEventListener('click', () => editMeal(meal, recipeName))
+        mealPlanCard.querySelector('#delete').addEventListener('click', () => deleteMeal(meal))
     });
 
     mealPlanCard.classList.add('meal-card')
     mealCards.appendChild(mealPlanCard);
+}
+
+function deleteMeal(meal)
+{
+    const mealUrl = `${mealsUrl}/${meal.id}`;
+    
+    fetch(mealUrl, {
+        method: 'DELETE',
+        headers
+    })
+    .then(getMeals);
 }
 
 const editMealsForm = document.getElementById('edit-meal');

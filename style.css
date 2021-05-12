@@ -113,4 +113,6 @@ body {
 
   .meal-card{
     padding: 1em;
+    border-right: 2px solid lightgray;
+    height: auto;
   }
