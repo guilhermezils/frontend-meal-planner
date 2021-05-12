@@ -8,6 +8,7 @@ const headers = {
 }
 const recipeBar = document.getElementById('recipe-bar');
 const recipeCard = document.getElementById('recipe-summary-container')//Guilherme
+const recipeBox = document.createElement('recipe-div')
 
 getRecipes();
 
@@ -22,7 +23,6 @@ function getRecipes()//Alexandra
 
 function displayRecipes(recipes){
     recipes.forEach (recipe => displayRecipe(recipe));
-    console.log(recipes)//Guilherme wrote this console.log
 }
 
 function displayRecipe(recipe)//Alexandra
@@ -32,22 +32,32 @@ function displayRecipe(recipe)//Alexandra
         <h4>${recipe.name}</h4>
         <img src=${recipe.image}>
         `;
-        recipeDiv.addEventListener('click',() => fetchOneRecipe(recipe))
+    recipeDiv.addEventListener('click',() => fetchOneRecipe(recipe))
     recipeBar.append(recipeDiv);
 }
 
-//Render Details - display 
-const recipeBox = document.createElement('recipe-div')
-
-//fetch that one recipe
-function fetchOneRecipe(recipe) {
-    console.log(recipe)
-    return fetch(`${recipesUrl}/${recipe.id}`)
-        .then(response => response.json())
-        .then(data)
+//Render Details - display //Guilherme
+function displayMealCard(recipe){
+    recipeBox.innerHTML = `
+    <span><div>${recipe.instructions}</div>
+    <img src=${recipe.image}></span>
+    <br><button>DELETE</button>
+    <br><button>Add to Planner </button>
+    `;
+    // still need to add ingredients
+    recipeCard.append(recipeBox)
+    
 }
 
-//get button element to add page updates to 
+//fetch that one recipe //Guilherme
+function fetchOneRecipe(recipe) {
+    recipeBox.innerHTML.reset
+    return fetch(`${recipesUrl}/${recipe.id}`)
+        .then(response => response.json())
+        .then(displayMealCard)
+}
+
+//get button element to add page updates to //Alexandra
 document.getElementById('next-page').addEventListener('click', () => updatePage(5))
 document.getElementById('previous-page').addEventListener('click', () => updatePage(-5))
 
@@ -61,7 +71,7 @@ function updatePage(value)
     getRecipes();
 }
 
-//add meal plan functionality/feature
+//add meal plan functionality/feature //Alexandra
 const weeklyMealsButton = document.getElementById('weekly-meals-btn')
 weeklyMealsButton.addEventListener('click', toggleWeeklyMealsView);
 
@@ -87,14 +97,14 @@ function getMeals()
     .then(displayPlannedMeals);
 }
 
-function displayPlannedMeals(meals)
+function displayPlannedMeals(meals)//Alexanra
 {
     // meals.sort
-    mealCards.innerHTML = '';
+    mealCards.innerHTML.reset;
     meals.forEach(meal => displayMeal(meal));
 }
 
-function displayMeal(meal)
+function displayMeal(meal)//Alexandra
 {
     let recipeName = '';    
     const mealPlanCard = document.createElement('span');

@@ -116,3 +116,15 @@ body {
     border-right: 2px solid lightgray;
     height: auto;
   }
+  #recipe-summary-container {
+    width: 50%;
+    padding: 2em;
+  }
+  #recipe-summary-container span{
+    display: flex;
+
+  }
+  #recipe-summary-container img{
+  max-width: 75vw;
+  max-height: 25vw;
+  }
