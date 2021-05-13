@@ -45,6 +45,7 @@ function displayMealCard(recipe){
 
     `;
     recipeCard.append(recipeBox)
+    document.getElementById('delete-recipe').addEventListener('click', () => deleteRecipe(recipe))
     
 }
 // Diplay list of ingredients //
@@ -69,6 +70,25 @@ function fetchRecipeIngredients(recipe){
         .then(response => response.json())
         .then(displayRecipeIngredients)
 }
+
+//delete recipe
+
+
+
+function deleteRecipe(recipe)
+{
+
+    const recipeUrl = `${recipesUrl}/${recipe.id}`;
+    
+    fetch(recipeUrl, {
+        method: 'DELETE',
+        headers
+    })
+    .then(() => {getRecipes();
+        recipeBox.innerHTML = ''});
+    
+}
+
 
 
 

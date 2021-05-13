@@ -122,10 +122,7 @@ body {
     display: flex;
     flex-direction: row;
   }
-  #recipe-summary-container span{
-    
-
-  }
+ 
   #recipe-summary-container img{
   max-width: 75vw;
   max-height: 25vw;
