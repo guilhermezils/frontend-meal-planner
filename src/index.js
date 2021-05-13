@@ -7,12 +7,12 @@ const headers = {
     Accept: 'application/json' 
 }
 const recipeBar = document.getElementById('recipe-bar');
-const recipeCard = document.getElementById('recipe-summary-container')//
-const recipeBox = document.createElement('recipe-div')
+const recipeCard = document.getElementById('recipe-summary-container')
+const recipeBox = document.createElement('div')
 
 getRecipes();
 
-function getRecipes()// 
+function getRecipes()
 {
     recipeBar.innerHTML = '';
 
@@ -25,7 +25,7 @@ function displayRecipes(recipes){
     recipes.forEach (recipe => displayRecipe(recipe));
 }
 
-function displayRecipe(recipe)//
+function displayRecipe(recipe)
 {
     const recipeDiv = document.createElement('span');
     recipeDiv.innerHTML = `
@@ -33,27 +33,38 @@ function displayRecipe(recipe)//
         <img src=${recipe.image}>
         `;
     recipeDiv.addEventListener('click',() => fetchOneRecipe(recipe))
-    recipeDiv.addEventListener('click',() => fetchRecipeIngredients(recipe))
     recipeBar.append(recipeDiv);
 }
 
 //Render Details - display 
 function displayMealCard(recipe){
+    document.getElementById('meal-info').innerHTML = '';
     recipeBox.innerHTML = `
-    <span><div>${recipe.instructions}</div>
-    <img src=${recipe.image}></span>
+        <div id= 'recipe-instructions'>${recipe.instructions}</div>
+        <img src = ${recipe.image}>
+        `;
+    //get and render ingredients
+    fetchRecipeIngredients(recipe, displayRecipeIngredients);
 
-    `;
+    //image 
+    // const recipeImg = document.createElement('img');
+    // recipeImg.src = recipe.image;
+    // recipeBox.appendChild(recipeImg);
+
+    //add id for css
+    recipeBox.id = 'recipe-box'
     recipeCard.append(recipeBox)
-    
 }
+
 // Diplay list of ingredients //
 function displayRecipeIngredients(ingredients){
+    const ul = document.createElement('ul');
     ingredients.forEach(obj => {
-        const li = document.createElement('li')
-            li.textContent = obj.name
-            recipeBox.append(li)
-    })
+        const li = document.createElement('li');
+        li.textContent = obj.name;
+        ul.appendChild(li);
+    });
+    recipeBox.append(ul);
 }
 
 //fetch that one recipe //
@@ -64,14 +75,11 @@ function fetchOneRecipe(recipe) {
         .then(displayMealCard)
 }
 //Fetch the ingredients from that recipe // 
-function fetchRecipeIngredients(recipe){
+function fetchRecipeIngredients(recipe, inputFunction){
     return fetch(`${recipesUrl}/${recipe.id}/ingredients`)
         .then(response => response.json())
-        .then(displayRecipeIngredients)
+        .then(inputFunction)
 }
-
-
-
 
 //get button element to add page updates to //
 document.getElementById('next-page').addEventListener('click', () => updatePage(5))
@@ -136,7 +144,6 @@ function getListOfIngredients(meals)
     })
     groceryListDiv.appendChild(groceryList);
     //list out each ingredient for those meals
-    // console.log(meals);
 }
 
 function getMeals(functionToCall)
@@ -146,14 +153,13 @@ function getMeals(functionToCall)
     .then(functionToCall);
 }
 
-function displayPlannedMeals(meals)//
+function displayPlannedMeals(meals)
 {
-    // meals.sort
-    mealCards.innerHTML.reset;
+    mealCards.innerHTML = '';
     meals.forEach(meal => displayMeal(meal));
 }
 
-function displayMeal(meal)//
+function displayMeal(meal)
 {
     let recipeName = '';    
     const mealPlanCard = document.createElement('span');
@@ -220,4 +226,3 @@ editMealsForm.addEventListener('submit', (event) => {
         getMeals(displayPlannedMeals);
     })
 });
-

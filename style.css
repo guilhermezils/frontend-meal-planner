@@ -24,123 +24,134 @@ body {
 }
 
 #filter-div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: skyblue;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: skyblue;
+}
   
-  #vegan-filter {
-    margin-top: 1vh;
-    width: 35vw;
-    font-size: 1em;
-    height: 5vh;
-    border-radius: 3em;
-  }
+#vegan-filter {
+  margin-top: 1vh;
+  width: 35vw;
+  font-size: 1em;
+  height: 5vh;
+  border-radius: 3em;
+}
 
-  #buttons{
-    display:flex;
-    justify-content: space-between;
-    background: skyblue;
-    padding:0 1em 1em 1em;
-  }
+#buttons{
+  display:flex;
+  justify-content: space-between;
+  background: skyblue;
+  padding:0 1em 1em 1em;
+}
 
-  #recipe-bar {
-    background: skyblue;
-    height: 15vh;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-  }
-  
-  #recipe-bar span {
-    height: 80%;
-    width: 8vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* border-radius: 5em;
-    border: 1px solid blue; */
-  }
+#recipe-bar {
+  background: skyblue;
+  height: 15vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
 
-  #recipe-bar span img{
-    max-width: 75%;
-    max-height: 75%;
-    padding-left: 1em;
-  }
+#recipe-bar span {
+  height: 80%;
+  width: 8vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border-radius: 5em;
+  border: 1px solid blue; */
+}
 
-  #top-half-page {
-    padding: 2em;
-  }
+#recipe-bar span img{
+  max-width: 75%;
+  max-height: 75%;
+  padding-left: 1em;
+}
 
-  #grocery-list h4{
-    text-align: center;
-  }
+#top-half-page {
+  padding: 0em 2em 1em 2em;
+}
 
-  #recipe-summary-container {
-    height: 35vh;
-    text-align: center;
-  }
-  
-  #recipe-info {
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-  }
-  
-  #recipe-info img {
-    max-width: 75vw;
-    max-height: 25vw;
-  }
+#grocery-list h4{
+  text-align: center;
+}
 
-  #weekly-meal-planner {
-    display:block;
-  }
 
-  #weekly-meal-planner form{
-    padding-left: 1em;
-    align-self: center;
-  }
+#recipe-info {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
 
-  #meal-plan{
-    height: 15%;
-    /* width: 75%; */
-    background: lemonchiffon; 
-  }
-
-  .flex {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-  }
-
-  .top-half-flex {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-  #meal-cards{
-    justify-content: space-around;
-  }
-
-  .meal-card{
-    padding: 1em;
-    border-right: 2px solid lightgray;
-    height: auto;
-  }
-  #recipe-summary-container {
-    width: 50%;
-    padding: 2em;
-    display: flex;
-    flex-direction: row;
-  }
-  #recipe-summary-container span{
-    
-
-  }
-  #recipe-summary-container img{
+#recipe-info img {
   max-width: 75vw;
   max-height: 25vw;
-  }
+}
+
+#weekly-meal-planner {
+  display:block;
+}
+
+#weekly-meal-planner form{
+  padding-left: 1em;
+  align-self: center;
+}
+
+#meal-plan{
+  height: 15%;
+  /* width: 75%; */
+  background: lemonchiffon; 
+}
+
+.flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.top-half-flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+#meal-cards{
+  justify-content: space-around;
+}
+
+.meal-card{
+  padding: 1em;
+  border-right: 2px solid lightgray;
+  height: auto;
+}
+#recipe-summary-container {
+  width: 75%;
+  padding: 0em 2em 1em 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#recipe-box{
+  display:flex;
+  max-width: fit-content;
+}
+
+#recipe-instructions{
+  /* text-overflow: scroll; */
+  max-width:75%;
+}
+
+#recipe-summary-container img{
+max-width: 50%;
+max-height: 25vw;
+}
+
+#recipe-buttons {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: row;
+}
