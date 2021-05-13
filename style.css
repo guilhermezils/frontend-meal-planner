@@ -102,6 +102,7 @@ body {
 #weekly-meal-planner form{
   padding-left: 1em;
   align-self: center;
+  margin-bottom: 1em;
 }
 
 #meal-plan{
@@ -140,20 +141,28 @@ body {
   align-items: flex-start;
 }
 
+#recipe-summary-container form{
+  padding-left: 1em;
+  align-self: left;
+  margin-bottom: 1em;
+}
+
 #recipe-box{
   display:flex;
   max-width: fit-content;
+  flex-direction: row-reverse;
+  justify-content: space-between;
 }
 
-
-
 #recipe-instructions{
-  /* text-overflow: scroll; */
+  display:flex;
   max-width:75%;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
 #recipe-summary-container img{
-max-width: 50%;
+max-width: 40%;
 max-height: 15vw;
 }
 

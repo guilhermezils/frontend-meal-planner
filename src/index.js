@@ -8,8 +8,9 @@ const headers = {
 }
 const recipeBar = document.getElementById('recipe-bar');
 const recipeCard = document.getElementById('recipe-summary-container')
-const recipeBox = document.createElement('div')
-
+const recipeBox = document.getElementById('recipe-box');
+const recipeBoxIngredientsUl = document.querySelector('#recipe-box ul')
+console.log(recipeBoxIngredientsUl);
 getRecipes();
 
 function getRecipes()
@@ -38,18 +39,20 @@ function displayRecipe(recipe)
 
 //Render Details - display 
 function displayMealCard(recipe){
-    document.getElementById('meal-info').innerHTML = '';
+    recipeBox.innerHTML = '';
     recipeBox.innerHTML = `
-        <div id= 'recipe-instructions'>${recipe.instructions}</div>
-        <img src = ${recipe.image}>
-        <button class='add-to-planner'>Add to Planner</button>
-        <button class='delete-recipe'>Delete Recipe</button>
+        <div id= 'recipe-instructions'>
+            <img src = ${recipe.image}>
+            ${recipe.instructions}
+            <div id='recipe-buttons'>
+                <button class='add-to-planner'>Add to Planner</button>
+                <button class='delete-recipe'>Delete Recipe</button>
+            </div>
+        </div>
         `;
     //get and render ingredients
     fetchRecipeIngredients(recipe.id, displayRecipeIngredients);
 
-    //add id for css
-    recipeBox.id = 'recipe-box'
     recipeCard.append(recipeBox)
     recipeBox.querySelector('button.delete-recipe').addEventListener('click', () => {
         deleteRecipe(recipe);
@@ -67,7 +70,7 @@ function addRecipeToPlanner(recipe)
     //get add meals form populate with recipe data
     addMealForm.name.value = recipe.name;
     addMealForm['recipe-id'].value = recipe.id;
-    addMealForm.style.display = 'block';
+    addMealForm.style.display = 'flex';
 }
 
 addMealForm.addEventListener('submit', (event) => {
@@ -95,11 +98,12 @@ addMealForm.addEventListener('submit', (event) => {
 
 // Diplay list of ingredients //
 function displayRecipeIngredients(ingredients){
-    const ul = document.createElement('ul');
+    
     ingredients.forEach(obj => {
-        createListOfIngredients(obj, ul);
+        createListOfIngredients(obj, recipeBoxIngredientsUl);
     });
-    recipeBox.append(ul);
+    recipeBox.appendChild(recipeBoxIngredientsUl);
+
 }
 
 function createListOfIngredients(ingredient, ul)
@@ -133,7 +137,7 @@ function deleteRecipe(recipe)
     })
     .then(() => {
         getRecipes();
-        recipeBox.innerHTML = 'Select a new recipe'
+        recipeBox.innerHTML = 'Select a recipe to get started'
     });
 }
 
@@ -249,7 +253,9 @@ function deleteMeal(meal)
         method: 'DELETE',
         headers
     })
-    .then(() => getMeals(displayPlannedMeals));
+    .then(() => {
+        getMeals(displayPlannedMeals);
+    });
 }
 
 const editMealsForm = document.getElementById('edit-meal');
