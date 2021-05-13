@@ -49,6 +49,8 @@ function displayMealCard(recipe){
     //add id for css
     recipeBox.id = 'recipe-box'
     recipeCard.append(recipeBox)
+    document.getElementById('delete-recipe').addEventListener('click', () => deleteRecipe(recipe))
+    
 }
 
 // Diplay list of ingredients //
@@ -80,6 +82,28 @@ function fetchRecipeIngredients(recipe_id, inputFunction){
         .then(response => response.json())
         .then(inputFunction)
 }
+
+//delete recipe
+
+
+
+function deleteRecipe(recipe)
+{
+
+    const recipeUrl = `${recipesUrl}/${recipe.id}`;
+    
+    fetch(recipeUrl, {
+        method: 'DELETE',
+        headers
+    })
+    .then(() => {getRecipes();
+        recipeBox.innerHTML = ''});
+    
+}
+
+
+
+
 
 //get button element to add page updates to //
 document.getElementById('next-page').addEventListener('click', () => updatePage(5))
