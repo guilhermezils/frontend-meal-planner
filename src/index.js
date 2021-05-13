@@ -33,6 +33,7 @@ function displayRecipe(recipe)//Alexandra
         <img src=${recipe.image}>
         `;
     recipeDiv.addEventListener('click',() => fetchOneRecipe(recipe))
+    recipeDiv.addEventListener('click',() => fetchRecipeIngredients(recipe)) //Guilherme
     recipeBar.append(recipeDiv);
 }
 
@@ -44,9 +45,16 @@ function displayMealCard(recipe){
     <br><button>DELETE</button>
     <br><button>Add to Planner </button>
     `;
-    // still need to add ingredients
     recipeCard.append(recipeBox)
     
+}
+// Diplay list of ingredients //Guilherme
+function displayRecipeIngredients(ingredients){
+    ingredients.forEach(obj => {
+        const li = document.createElement('li')
+            li.textContent = obj.name
+            recipeBox.append(li)
+    })
 }
 
 //fetch that one recipe //Guilherme
@@ -56,6 +64,15 @@ function fetchOneRecipe(recipe) {
         .then(response => response.json())
         .then(displayMealCard)
 }
+//Fetch the ingredients from that recipe // Guilherme
+function fetchRecipeIngredients(recipe){
+    return fetch(`${recipesUrl}/${recipe.id}/ingredients`)
+        .then(response => response.json())
+        .then(displayRecipeIngredients)
+}
+
+
+
 
 //get button element to add page updates to //Alexandra
 document.getElementById('next-page').addEventListener('click', () => updatePage(5))
@@ -97,7 +114,7 @@ function getMeals()
     .then(displayPlannedMeals);
 }
 
-function displayPlannedMeals(meals)//Alexanra
+function displayPlannedMeals(meals)//Alexandra
 {
     // meals.sort
     mealCards.innerHTML.reset;
