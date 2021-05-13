@@ -144,6 +144,7 @@ function getListOfIngredients(meals)
     })
     groceryListDiv.appendChild(groceryList);
     //list out each ingredient for those meals
+    // console.log(meals);
 }
 
 function getMeals(functionToCall)
