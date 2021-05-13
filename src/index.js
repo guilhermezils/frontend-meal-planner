@@ -7,12 +7,12 @@ const headers = {
     Accept: 'application/json' 
 }
 const recipeBar = document.getElementById('recipe-bar');
-const recipeCard = document.getElementById('recipe-summary-container')//Guilherme
+const recipeCard = document.getElementById('recipe-summary-container')//
 const recipeBox = document.createElement('recipe-div')
 
 getRecipes();
 
-function getRecipes()//Alexandra 
+function getRecipes()// 
 {
     recipeBar.innerHTML = '';
 
@@ -25,7 +25,7 @@ function displayRecipes(recipes){
     recipes.forEach (recipe => displayRecipe(recipe));
 }
 
-function displayRecipe(recipe)//Alexandra
+function displayRecipe(recipe)//
 {
     const recipeDiv = document.createElement('span');
     recipeDiv.innerHTML = `
@@ -33,22 +33,21 @@ function displayRecipe(recipe)//Alexandra
         <img src=${recipe.image}>
         `;
     recipeDiv.addEventListener('click',() => fetchOneRecipe(recipe))
-    recipeDiv.addEventListener('click',() => fetchRecipeIngredients(recipe)) //Guilherme
+    recipeDiv.addEventListener('click',() => fetchRecipeIngredients(recipe))
     recipeBar.append(recipeDiv);
 }
 
-//Render Details - display //Guilherme
+//Render Details - display 
 function displayMealCard(recipe){
     recipeBox.innerHTML = `
     <span><div>${recipe.instructions}</div>
     <img src=${recipe.image}></span>
-    <br><button>DELETE</button>
-    <br><button>Add to Planner </button>
+
     `;
     recipeCard.append(recipeBox)
     
 }
-// Diplay list of ingredients //Guilherme
+// Diplay list of ingredients //
 function displayRecipeIngredients(ingredients){
     ingredients.forEach(obj => {
         const li = document.createElement('li')
@@ -57,14 +56,14 @@ function displayRecipeIngredients(ingredients){
     })
 }
 
-//fetch that one recipe //Guilherme
+//fetch that one recipe //
 function fetchOneRecipe(recipe) {
     recipeBox.innerHTML.reset
     return fetch(`${recipesUrl}/${recipe.id}`)
         .then(response => response.json())
         .then(displayMealCard)
 }
-//Fetch the ingredients from that recipe // Guilherme
+//Fetch the ingredients from that recipe // 
 function fetchRecipeIngredients(recipe){
     return fetch(`${recipesUrl}/${recipe.id}/ingredients`)
         .then(response => response.json())
@@ -74,7 +73,7 @@ function fetchRecipeIngredients(recipe){
 
 
 
-//get button element to add page updates to //Alexandra
+//get button element to add page updates to //
 document.getElementById('next-page').addEventListener('click', () => updatePage(5))
 document.getElementById('previous-page').addEventListener('click', () => updatePage(-5))
 
@@ -88,7 +87,7 @@ function updatePage(value)
     getRecipes();
 }
 
-//add meal plan functionality/feature //Alexandra
+//add meal plan functionality/feature //
 const weeklyMealsButton = document.getElementById('weekly-meals-btn')
 weeklyMealsButton.addEventListener('click', toggleWeeklyMealsView);
 
@@ -114,14 +113,14 @@ function getMeals()
     .then(displayPlannedMeals);
 }
 
-function displayPlannedMeals(meals)//Alexandra
+function displayPlannedMeals(meals)//
 {
     // meals.sort
     mealCards.innerHTML.reset;
     meals.forEach(meal => displayMeal(meal));
 }
 
-function displayMeal(meal)//Alexandra
+function displayMeal(meal)//
 {
     let recipeName = '';    
     const mealPlanCard = document.createElement('span');
@@ -189,8 +188,3 @@ editMealsForm.addEventListener('submit', (event) => {
     })
 });
 
-
-
-//make a fetch request to recipe ingredients
-//using the recipe id
-//get request to recipeingredients#index
