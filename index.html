@@ -30,16 +30,35 @@
         <h1>Recipe:</h1>
         <div id="meal-info">
           Select a recipe to get started
-          
         </div>
         <div id="recipe-buttons">
-          <br><button id='delete-recipe'>DELETE</button>
-          <br><button id='add-to-planner'>Add to Planner </button>
+        </div>
       </div>
-      </div>
-
       <div id = 'grocery-list'>
       </div>
+      <form id = 'add-meal' style = 'display:none'>
+        <input type='hidden' name='recipe-id'>
+        <label> Recipe Name </label>  
+        <input type='text' name='name' placeholder = 'Recipe Name'>
+        <label> Day of Meal</label>
+        <select id='meal-type' name='date'>
+          <option value="Monday">Monday</option>
+          <option value="Tuesday">Tuesday</option>
+          <option value="Wednesday">Wednesday</option>
+          <option value="Thursday">Thursday</option>
+          <option value="Friday">Friday</option>
+          <option value="Saturday">Saturday</option>
+          <option value="Sunday">Sunday</option>
+          </select> 
+        <label> Meal Type </label>
+        <select id='meal-type' name='type-of-meal'>
+          <option value="Breakfast">Breakfast</option>
+          <option value="Lunch">Lunch</option>
+          <option value="Dinner">Dinner</option>
+          <option value="Snack">Snack</option>
+          </select> 
+        <input type='submit' value='Add Meal'> </input>
+      </form>
     </div>
       <div id = 'weekly-meal-planner' style = 'display:none'>
         <div id='meal-plan' class = 'margin flex' >
@@ -52,7 +71,15 @@
           <label> Recipe Name </label>  
           <input type='text' name='name' placeholder = 'Recipe Name'>
           <label> Day of Meal</label>
-          <input type='text' name='date' placeholder = 'Monday'>
+          <select id='meal-type' name='date'>
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+            <option value="Saturday">Saturday</option>
+            <option value="Sunday">Sunday</option>
+            </select>
           <label> Meal Type </label>
           <select id='meal-type' name='type-of-meal'>
             <option value="Breakfast">Breakfast</option>

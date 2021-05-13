@@ -15,9 +15,9 @@ getRecipes();
 function getRecipes()
 {
     recipeBar.innerHTML = '';
-
-    fetch(`${recipesUrl}/limit=${pageSize}/offset=${pageOffset}`) 
-    .then(res=>res.json())
+    const multiPageUrl = `${recipesUrl}/limit=${pageSize}/offset=${pageOffset}`;
+    fetch(multiPageUrl) 
+    .then(res => res.json())
     .then(displayRecipes);
 }
 
@@ -42,6 +42,8 @@ function displayMealCard(recipe){
     recipeBox.innerHTML = `
         <div id= 'recipe-instructions'>${recipe.instructions}</div>
         <img src = ${recipe.image}>
+        <button class='add-to-planner'>Add to Planner</button>
+        <button class='delete-recipe'>Delete Recipe</button>
         `;
     //get and render ingredients
     fetchRecipeIngredients(recipe.id, displayRecipeIngredients);
@@ -49,9 +51,47 @@ function displayMealCard(recipe){
     //add id for css
     recipeBox.id = 'recipe-box'
     recipeCard.append(recipeBox)
-    document.getElementById('delete-recipe').addEventListener('click', () => deleteRecipe(recipe))
-    
+    recipeBox.querySelector('button.delete-recipe').addEventListener('click', () => {
+        deleteRecipe(recipe);
+    });
+
+    recipeBox.querySelector('button.add-to-planner').addEventListener('click', () => {
+        addRecipeToPlanner(recipe);
+    })
 }
+
+const addMealForm = document.getElementById('add-meal');
+
+function addRecipeToPlanner(recipe)
+{
+    //get add meals form populate with recipe data
+    addMealForm.name.value = recipe.name;
+    addMealForm['recipe-id'].value = recipe.id;
+    addMealForm.style.display = 'block';
+}
+
+addMealForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const date = event.target.date.value;
+    const typeOfMeal = event.target['type-of-meal'].value;
+    const recipeId = event.target['recipe-id'].value;
+    const meal = {
+        date,
+        typeOfMeal,
+        recipe_id: recipeId
+    }
+
+    fetch(mealsUrl, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify(meal)
+    })
+    .then(res => res.json())
+    .then(() => {
+        addMealForm.style.display = 'none';
+        getMeals(displayPlannedMeals);
+    })
+});
 
 // Diplay list of ingredients //
 function displayRecipeIngredients(ingredients){
@@ -84,26 +124,18 @@ function fetchRecipeIngredients(recipe_id, inputFunction){
 }
 
 //delete recipe
-
-
-
 function deleteRecipe(recipe)
 {
-
     const recipeUrl = `${recipesUrl}/${recipe.id}`;
-    
     fetch(recipeUrl, {
         method: 'DELETE',
         headers
     })
-    .then(() => {getRecipes();
-        recipeBox.innerHTML = ''});
-    
+    .then(() => {
+        getRecipes();
+        recipeBox.innerHTML = 'Select a new recipe'
+    });
 }
-
-
-
-
 
 //get button element to add page updates to //
 document.getElementById('next-page').addEventListener('click', () => updatePage(5))
@@ -249,7 +281,7 @@ editMealsForm.addEventListener('submit', (event) => {
     })
     .then(res => res.json())
     .then((meal) => {
-        console.log(meal);
+        // console.log(meal);
         getMeals(displayPlannedMeals);
     })
 });
