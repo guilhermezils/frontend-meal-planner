@@ -44,12 +44,7 @@ function displayMealCard(recipe){
         <img src = ${recipe.image}>
         `;
     //get and render ingredients
-    fetchRecipeIngredients(recipe, displayRecipeIngredients);
-
-    //image 
-    // const recipeImg = document.createElement('img');
-    // recipeImg.src = recipe.image;
-    // recipeBox.appendChild(recipeImg);
+    fetchRecipeIngredients(recipe.id, displayRecipeIngredients);
 
     //add id for css
     recipeBox.id = 'recipe-box'
@@ -60,11 +55,16 @@ function displayMealCard(recipe){
 function displayRecipeIngredients(ingredients){
     const ul = document.createElement('ul');
     ingredients.forEach(obj => {
-        const li = document.createElement('li');
-        li.textContent = obj.name;
-        ul.appendChild(li);
+        createListOfIngredients(obj, ul);
     });
     recipeBox.append(ul);
+}
+
+function createListOfIngredients(ingredient, ul)
+{
+    const li = document.createElement('li');
+    li.textContent = ingredient.name;
+    ul.appendChild(li);
 }
 
 //fetch that one recipe //
@@ -75,8 +75,8 @@ function fetchOneRecipe(recipe) {
         .then(displayMealCard)
 }
 //Fetch the ingredients from that recipe // 
-function fetchRecipeIngredients(recipe, inputFunction){
-    return fetch(`${recipesUrl}/${recipe.id}/ingredients`)
+function fetchRecipeIngredients(recipe_id, inputFunction){
+    return fetch(`${recipesUrl}/${recipe_id}/ingredients`)
         .then(response => response.json())
         .then(inputFunction)
 }
@@ -129,22 +129,24 @@ function toggleGroceryListView(event)
     groceryListDiv.style.display = groceryListDiv.style.display == 'block' ? 'none' : 'block';
 }
 
+const groceryList = document.createElement('ul');
 function getListOfIngredients(meals)
 {
     groceryListDiv.innerHTML = '';
-    const groceryList = document.createElement('ul');
     groceryList.innerHTML = '<h4><i>Grocery List</i></h4>';
     //get ingredients for all those meals
     meals.forEach(meal => {
-        const recipeId = meal.recipe_id;
-        console.log(recipeId);
-        const groceryItem = document.createElement('li');
-        groceryItem.innerHTML = `${recipeId}`;
-        groceryList.appendChild(groceryItem);
+        //list out each ingredient for those meals
+        fetchRecipeIngredients(meal.recipe_id, displayGroceryList)
     })
     groceryListDiv.appendChild(groceryList);
-    //list out each ingredient for those meals
     // console.log(meals);
+}
+
+function displayGroceryList(ingredients)
+{
+    // let uniqueIngredients = ingredients.filter(ingredient => ingredient != ingredient);
+    ingredients.forEach(ingredient => createListOfIngredients(ingredient, groceryList))
 }
 
 function getMeals(functionToCall)
