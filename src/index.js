@@ -255,6 +255,7 @@ function deleteMeal(meal)
     })
     .then(() => {
         getMeals(displayPlannedMeals);
+        getMeals(getListOfIngredients);
     });
 }
 
