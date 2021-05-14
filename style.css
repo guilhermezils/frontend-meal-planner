@@ -108,6 +108,8 @@ body {
 #meal-plan{
   height: 15%;
   background: lemonchiffon; 
+  display: flex;
+  flex-direction: column;
 }
 
 .flex {
