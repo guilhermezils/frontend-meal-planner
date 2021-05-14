@@ -93,6 +93,7 @@ addMealForm.addEventListener('submit', (event) => {
     .then(() => {
         addMealForm.style.display = 'none';
         getMeals(displayPlannedMeals);
+        getMeals(getListOfIngredients);
     })
 });
 
@@ -260,7 +261,6 @@ function deleteMeal(meal)
         getMeals(getListOfIngredients);
     });
 }
-
 const editMealsForm = document.getElementById('edit-meal');
 
 function editMeal(meal, recipeName)
