@@ -31,12 +31,9 @@ body {
   background: skyblue;
 }
   
-#vegan-filter {
-  margin-top: 1vh;
-  width: 35vw;
-  font-size: 1em;
-  height: 5vh;
-  border-radius: 3em;
+#filter-div {
+  background: dimgray;
+  padding: .25em;
 }
 
 #buttons{
@@ -60,8 +57,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* border-radius: 5em;
-  border: 1px solid blue; */
+
 }
 
 #recipe-bar span img{
@@ -108,6 +104,8 @@ body {
 #meal-plan{
   height: 15%;
   background: lemonchiffon; 
+  display: flex;
+  flex-direction: column;
 }
 
 .flex {

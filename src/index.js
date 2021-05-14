@@ -1,6 +1,6 @@
 const recipesUrl = "http://localhost:3000/recipes";
 const mealsUrl = "http://localhost:3000/meals";
-const pageSize = 5;
+let pageSize = 5;
 let pageOffset = 0;
 const headers = {
     'Content-Type': 'application/json',
@@ -11,15 +11,15 @@ const recipeCard = document.getElementById('recipe-summary-container')
 const recipeBox = document.getElementById('recipe-box');
 const recipeBoxIngredientsUl = document.querySelector('#recipe-box ul')
 
-getRecipes();
+getRecipes(displayRecipes);
 
-function getRecipes()
+function getRecipes(inputFunction)
 {
     recipeBar.innerHTML = '';
     const multiPageUrl = `${recipesUrl}/limit=${pageSize}/offset=${pageOffset}`;
     fetch(multiPageUrl) 
     .then(res => res.json())
-    .then(displayRecipes);
+    .then(inputFunction);
 }
 
 function displayRecipes(recipes){
@@ -138,7 +138,7 @@ function deleteRecipe(recipe)
         headers
     })
     .then(() => {
-        getRecipes();
+        getRecipes(displayRecipes);
         recipeBox.innerHTML = 'Select a recipe to get started'
     });
 }
@@ -154,7 +154,7 @@ function updatePage(value)
     {
         pageOffset = 0;
     }
-    getRecipes();
+    getRecipes(displayRecipes);
 }
 
 //add meal plan functionality/feature //
@@ -288,10 +288,34 @@ editMealsForm.addEventListener('submit', (event) => {
         body: JSON.stringify(updatedMeal)
     })
     .then(res => res.json())
-    .then((meal) => {
-        // console.log(meal);
+    .then(() => {
         getMeals(displayPlannedMeals);
     })
 });
 
 //filter the recipe bar at the top
+//create a filter button
+const filterSelect = document.createElement('select')
+const alphabet =['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+alphabet.forEach(letter => {
+    const letterOption = document.createElement('option');
+    letterOption.value = letter;
+    letterOption.innerHTML = letter;
+    filterSelect.appendChild(letterOption);
+});
+
+const filterDiv = document.getElementById('filter-div');
+filterDiv.appendChild(filterSelect);
+
+filterSelect.addEventListener('change', filterRecipesByLetter)
+function filterRecipesByLetter(event)
+{
+    const letter = event.target.value;
+    // pageSize = 1000;
+    // pageOffset = 0;
+    getRecipes(recipes => {
+        let filteredRecipes = recipes.filter(recipe => recipe.name.charAt(0).toLowerCase() == letter);
+        console.log(filteredRecipes);
+        displayRecipes(filteredRecipes);
+    });
+}
