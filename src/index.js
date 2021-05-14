@@ -93,7 +93,6 @@ addMealForm.addEventListener('submit', (event) => {
     .then(() => {
         addMealForm.style.display = 'none';
         getMeals(displayPlannedMeals);
-        getMeals(getListOfIngredients);
     })
 });
 
