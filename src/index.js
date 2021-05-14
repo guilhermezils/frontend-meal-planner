@@ -10,7 +10,7 @@ const recipeBar = document.getElementById('recipe-bar');
 const recipeCard = document.getElementById('recipe-summary-container')
 const recipeBox = document.getElementById('recipe-box');
 const recipeBoxIngredientsUl = document.querySelector('#recipe-box ul')
-console.log(recipeBoxIngredientsUl);
+
 getRecipes();
 
 function getRecipes()
@@ -99,6 +99,8 @@ addMealForm.addEventListener('submit', (event) => {
 // Diplay list of ingredients //
 function displayRecipeIngredients(ingredients){
     
+    recipeBoxIngredientsUl.innerHTML = '';
+
     ingredients.forEach(obj => {
         createListOfIngredients(obj, recipeBoxIngredientsUl);
     });
@@ -115,7 +117,7 @@ function createListOfIngredients(ingredient, ul)
 
 //fetch that one recipe //
 function fetchOneRecipe(recipe) {
-    recipeBox.innerHTML.reset
+    recipeBox.innerHTML.reset;
     return fetch(`${recipesUrl}/${recipe.id}`)
         .then(response => response.json())
         .then(displayMealCard)
@@ -163,7 +165,7 @@ const weeklyMealPlanner = document.getElementById('weekly-meal-planner');
 const mealPlanDiv = document.getElementById('meal-plan');
 const mealCards = document.getElementById('meal-cards');
 
-function toggleWeeklyMealsView(event)
+function toggleWeeklyMealsView()
 {
     //change text on button
     weeklyMealsButton.innerHTML = weeklyMealsButton.innerHTML == 'Hide Weekly Meals' ? 'Weekly Meals' : 'Hide Weekly Meals';
@@ -292,3 +294,5 @@ editMealsForm.addEventListener('submit', (event) => {
         getMeals(displayPlannedMeals);
     })
 });
+
+//filter the recipe bar at the top
